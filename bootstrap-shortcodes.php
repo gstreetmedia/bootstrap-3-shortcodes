@@ -82,7 +82,8 @@ class BoostrapShortcodes {
       'collapse', 
       'collapsibles', 
       'column', 
-      'container', 
+      'container',
+      'container-fluid',
       'divider', 
       'dropdown', 
       'dropdown-header', 
@@ -292,15 +293,43 @@ class BoostrapShortcodes {
       ( $data_props ) ? ' ' . $data_props : '',
       do_shortcode( $content )
     );
-  }    
-    
-  /*--------------------------------------------------------------------------------------
-    *
-    * bs_dropdown
-    *
-    * @author M. W. Delaney
-    *
-    *-------------------------------------------------------------------------------------*/
+  }
+
+    /*--------------------------------------------------------------------------------------
+	 *
+	 * bs_container_fluid
+	 *
+	 * @author Robin Wouters
+	 * @since 3.0.3.3
+	 *
+	 *-------------------------------------------------------------------------------------*/
+    function bs_container_fluid( $atts, $content = null ) {
+
+        $atts = shortcode_atts( array(
+            "xclass" => false,
+            "data"   => false
+        ), $atts );
+
+        $class  = 'container-fluid';
+        $class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+
+        $data_props = $this->parse_data_attributes( $atts['data'] );
+
+        return sprintf(
+            '<div class="%s"%s>%s</div>',
+            esc_attr( $class ),
+            ( $data_props ) ? ' ' . $data_props : '',
+            do_shortcode( $content )
+        );
+    }
+
+    /*--------------------------------------------------------------------------------------
+	  *
+	  * bs_dropdown
+	  *
+	  * @author M. W. Delaney
+	  *
+	  *-------------------------------------------------------------------------------------*/
   function bs_dropdown( $atts, $content = null ) {
 
 	$atts = shortcode_atts( array(
